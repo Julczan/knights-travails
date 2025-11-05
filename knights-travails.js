@@ -27,61 +27,37 @@
 //   }
 // }
 
-function legalMoves(arr) {
-  const result = [];
+const start = [3, 3];
 
-  arr[0] += 2;
-  arr[1] += 1;
+let first = start[0];
+let second = start[1];
 
-  result.push(arr);
+const moves = [
+  { x: 2, y: 1 },
+  { x: 1, y: 2 },
+  { x: -2, y: 1 },
+  { x: -1, y: 2 },
+  { x: -2, y: -1 },
+  { x: -1, y: -2 },
+  { x: 1, y: -2 },
+  { x: 2, y: -1 },
+];
 
-  // arr[0] += 1;
-  // arr[1] += 2;
-
-  // arr[0] -= 2;
-  // arr[1] += 1;
-
-  // arr[0] -= 1;
-  // arr[1] += 2;
-
-  // arr[0] -= 2;
-  // arr[1] -= 1;
-
-  // arr[0] -= 1;
-  // arr[1] -= 2;
-
-  // arr[0] += 1;
-  // arr[1] -= 2;
-
-  // arr[0] += 2;
-  // arr[1] -= 1;
-  return result;
-}
-
-function move(first, second) {
-  first += 2;
-  second += 1;
-
-  if (first < 0 || first > 7 || second < 0 || second > 7) {
-    return;
+class legalMoves {
+  constructor(first, second) {
+    this.first = first;
+    this.second = second;
   }
-  return [first, second];
 }
 
-function findEdges(arr) {
-  let first = arr[0];
-  let second = arr[1];
+function legalMove(firstMove, secondMove, x, y) {
+  firstMove += x;
+  secondMove += y;
 
-  const edge = move(first, second);
-  return edge;
+  return [firstMove, secondMove];
 }
 
-const start = [7, 7];
-
-console.log(findEdges(start));
-
-// const V = 8;
-
-// const graph = Array.from({ length: V }, () => []);
-
-// const S = 2;
+for (let i = 0; i < moves.length; i++) {
+  const result = legalMove(first, second, moves[i].x, moves[i].y);
+  console.log(result);
+}
