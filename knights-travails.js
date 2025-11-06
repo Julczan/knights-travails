@@ -27,7 +27,7 @@
 //   }
 // }
 
-const start = [3, 3];
+const start = [0, 0];
 
 let first = start[0];
 let second = start[1];
@@ -54,10 +54,22 @@ function legalMove(firstMove, secondMove, x, y) {
   firstMove += x;
   secondMove += y;
 
+  if (firstMove < 0 || firstMove > 7 || secondMove < 0 || secondMove > 7) {
+    return;
+  }
+
   return [firstMove, secondMove];
 }
 
+let edges = [];
+
 for (let i = 0; i < moves.length; i++) {
   const result = legalMove(first, second, moves[i].x, moves[i].y);
-  console.log(result);
+  edges.push(result);
 }
+
+edges = edges.filter((element) => {
+  return element !== undefined;
+});
+
+console.log(edges);
