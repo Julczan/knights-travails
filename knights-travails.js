@@ -1,6 +1,7 @@
 function knightMoves(start, end) {
   const q = [];
   const visited = new Set();
+  const par = new Map();
   const dist = new Map();
 
   dist.set(JSON.stringify(start), 0);
@@ -15,11 +16,12 @@ function knightMoves(start, end) {
       if (!visited.has(JSON.stringify(move))) {
         q.push(move);
         dist.set(JSON.stringify(move), dist.get(JSON.stringify(curr)) + 1);
+        par.set(JSON.stringify(move), curr);
       }
     }
   }
 
-  return dist;
+  return par;
 }
 
 function getEdges(start) {
@@ -62,4 +64,4 @@ function legalMove(firstMove, secondMove, x, y) {
   return [firstMove, secondMove];
 }
 
-console.log(knightMoves([3, 3]));
+console.log(knightMoves([0, 0]));
