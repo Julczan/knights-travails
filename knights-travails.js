@@ -1,6 +1,9 @@
 function knightMoves(start, end) {
   const q = [];
   const visited = new Set();
+  const dist = new Map();
+
+  dist.set(JSON.stringify(start), 0);
   q.push(start);
 
   while (q.length > 0) {
@@ -11,11 +14,12 @@ function knightMoves(start, end) {
     for (const move of possibleMoves) {
       if (!visited.has(JSON.stringify(move))) {
         q.push(move);
+        dist.set(JSON.stringify(move), dist.get(JSON.stringify(curr)) + 1);
       }
     }
   }
 
-  return visited;
+  return dist;
 }
 
 function getEdges(start) {
