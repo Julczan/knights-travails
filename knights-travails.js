@@ -1,53 +1,50 @@
-// function shortestPathBFS(graph, S, par, dist) {
-//   const q = [];
-//   dist[S] = 0;
-//   q.push(S);
+function knightMoves(start, end) {
+  const q = [];
+  const visited = new Set();
+  q.push(start);
 
-//   while (q.length > 0) {
-//     const node = q.shift();
+  while (q.length > 0) {
+    const curr = q.shift();
+    visited.add(JSON.stringify(curr));
+    const possibleMoves = getEdges(curr);
 
-//     for (const neighbor of graph[node]) {
-//     }
-//   }
-// }
-
-// function printShortestDistance(graph, S, D, V) {
-//   const par = Array(V).fill(-1);
-//   const dist = Array(V).fill(Infinity);
-//   shortestPathBFS(graph, S, par, dist);
-
-//   const path = [];
-
-//   let currentNode = D;
-//   path.push(D);
-
-//   while (par[currentNode !== -1]) {
-//     path.push(par[currentNode]);
-//     currentNode = par[currentNode];
-//   }
-// }
-
-const start = [0, 0];
-
-let first = start[0];
-let second = start[1];
-
-const moves = [
-  { x: 2, y: 1 },
-  { x: 1, y: 2 },
-  { x: -2, y: 1 },
-  { x: -1, y: 2 },
-  { x: -2, y: -1 },
-  { x: -1, y: -2 },
-  { x: 1, y: -2 },
-  { x: 2, y: -1 },
-];
-
-class legalMoves {
-  constructor(first, second) {
-    this.first = first;
-    this.second = second;
+    for (const move of possibleMoves) {
+      if (!visited.has(JSON.stringify(move))) {
+        q.push(move);
+      }
+    }
   }
+
+  return visited;
+}
+
+function getEdges(start) {
+  let first = start[0];
+  let second = start[1];
+
+  const moves = [
+    { x: 2, y: 1 },
+    { x: 1, y: 2 },
+    { x: -2, y: 1 },
+    { x: -1, y: 2 },
+    { x: -2, y: -1 },
+    { x: -1, y: -2 },
+    { x: 1, y: -2 },
+    { x: 2, y: -1 },
+  ];
+
+  let edges = [];
+
+  for (let i = 0; i < moves.length; i++) {
+    const result = legalMove(first, second, moves[i].x, moves[i].y);
+    edges.push(result);
+  }
+
+  edges = edges.filter((element) => {
+    return element !== undefined;
+  });
+
+  return edges;
 }
 
 function legalMove(firstMove, secondMove, x, y) {
@@ -61,15 +58,4 @@ function legalMove(firstMove, secondMove, x, y) {
   return [firstMove, secondMove];
 }
 
-let edges = [];
-
-for (let i = 0; i < moves.length; i++) {
-  const result = legalMove(first, second, moves[i].x, moves[i].y);
-  edges.push(result);
-}
-
-edges = edges.filter((element) => {
-  return element !== undefined;
-});
-
-console.log(edges);
+console.log(knightMoves([3, 3]));
