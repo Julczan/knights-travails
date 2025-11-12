@@ -1,4 +1,7 @@
 function knightMoves(start, end) {
+  if (checkStartingPos(start, end)) {
+    return "Illegal starting position";
+  }
   const q = [];
   const visited = new Set();
   const par = new Map();
@@ -22,6 +25,22 @@ function knightMoves(start, end) {
   }
 
   return printShortestDistance(par, start, end, dist);
+}
+
+function checkStartingPos(start, end) {
+  if (
+    start[0] < 0 ||
+    start[0] > 7 ||
+    start[1] < 0 ||
+    start[1] > 7 ||
+    end[0] < 0 ||
+    end[0] > 7 ||
+    end[1] < 0 ||
+    end[1] > 7
+  ) {
+    return true;
+  }
+  return false;
 }
 
 function printShortestDistance(par, start, end, dist) {
@@ -78,4 +97,4 @@ function legalMove(firstMove, secondMove, x, y) {
   return [firstMove, secondMove];
 }
 
-console.log(knightMoves([0, 0], [7, 7]));
+console.log(knightMoves([1, 0], [6, 7]));
