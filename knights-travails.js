@@ -21,7 +21,18 @@ function knightMoves(start, end) {
     }
   }
 
-  return par;
+  return printShortestDistance(par, start, end);
+}
+
+function printShortestDistance(par, start, end) {
+  const path = [];
+  let currentNode = end;
+  while (par.get(JSON.stringify(currentNode))) {
+    path.push(currentNode);
+    currentNode = par.get(JSON.stringify(currentNode));
+  }
+  path.push(start);
+  return path.reverse();
 }
 
 function getEdges(start) {
@@ -64,4 +75,4 @@ function legalMove(firstMove, secondMove, x, y) {
   return [firstMove, secondMove];
 }
 
-console.log(knightMoves([0, 0]));
+console.log(knightMoves([0, 0], [7, 7]));
