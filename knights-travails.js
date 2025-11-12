@@ -21,10 +21,10 @@ function knightMoves(start, end) {
     }
   }
 
-  return printShortestDistance(par, start, end);
+  return printShortestDistance(par, start, end, dist);
 }
 
-function printShortestDistance(par, start, end) {
+function printShortestDistance(par, start, end, dist) {
   const path = [];
   let currentNode = end;
   while (par.get(JSON.stringify(currentNode))) {
@@ -32,6 +32,9 @@ function printShortestDistance(par, start, end) {
     currentNode = par.get(JSON.stringify(currentNode));
   }
   path.push(start);
+  const numOfMoves = dist.get(JSON.stringify(end));
+  const message = `You made it in ${numOfMoves} moves! Here's the path:`;
+  console.log(message);
   return path.reverse();
 }
 
